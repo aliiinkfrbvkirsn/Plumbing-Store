@@ -11,3 +11,7 @@
 .contact-section{max-width:1180px;margin:0 auto;padding:44px 6vw}.contact-section .product-form{max-width:560px}
 .contact-section textarea{min-height:110px;resize:vertical}
 .message-card{padding:12px;border:1px solid #e0e5eb;border-radius:12px;margin:8px 0;background:#fff}.message-card small{display:block;color:#6b7280;margin:5px 0}.message-card form{display:flex;gap:8px;margin-top:8px}.message-card input{min-width:0;flex:1}
+
+.site-nav{display:flex;gap:18px;align-items:center}.site-nav a{color:inherit;text-decoration:none;font-size:14px}.site-nav a:hover{text-decoration:underline}
+.about-section{max-width:1180px;margin:0 auto;padding:52px 6vw}.about-section>div{max-width:720px}.about-section p:not(.eyebrow){line-height:1.7;color:#64748b}
+@media(max-width:760px){.site-nav{display:none}}
