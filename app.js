@@ -17,6 +17,7 @@ const t = key => translations[lang][key] || translations.ru[key] || key;
 const save = () => {localStorage.setItem("plumb_cart",JSON.stringify(cart));};
 const localized = (p, field) => { const value=p[field]; if(value && typeof value==="object" && !Array.isArray(value)) return value[lang] || value.ru || value.ky || value.en || ""; return p[field+(lang==="ky"?"Ky":lang==="en"?"En":"")] || value || ""; };
 async function loadProducts(){
+ $("#product-grid").innerHTML='<div class="loading-state" role="status">Загружаем товары…</div>';
  try {
   const result=await db.from("products").select("id,sku,name,description,category,price,stock,image_path,is_active").eq("is_active",true).order("created_at",{ascending:false});
   if(result.error) throw result.error;
@@ -24,7 +25,7 @@ async function loadProducts(){
   renderProducts(); renderCart(); renderSeller();
  } catch(error) {
   console.error("Supabase products load failed:",error);
-  $("#product-grid").innerHTML="<div class=\"empty-state\">Не удалось загрузить товары. Проверь подключение к базе данных.</div>";
+  $("#product-grid").innerHTML=`<div class="empty-state load-error"><strong>Не удалось загрузить товары</strong><br>${esc(error.message||"Проверь подключение к базе данных.")}<br><button type="button" id="retry-products" class="button button-light">Повторить</button></div>`;
   toast("Ошибка загрузки каталога");
  }
 }
@@ -58,6 +59,7 @@ function renderSeller(){
 }
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 $("#language").addEventListener("change",async e=>{lang=e.target.value;localStorage.setItem("plumb_lang",lang);applyLanguage();if(currentUser){const {error}=await db.from("profiles").update({language:lang}).eq("id",currentUser.id);if(error)console.warn("Could not save language preference",error);}});
+$("#product-grid").addEventListener("click",e=>{if(e.target.closest("#retry-products"))loadProducts();});
 $("#search").addEventListener("input",renderProducts);$("#category-filter").addEventListener("change",renderProducts);
 $("#product-grid").addEventListener("click",e=>{const b=e.target.closest("[data-add]");if(!b)return;const id=b.dataset.add,p=products.find(x=>String(x.id)===String(id));if((cart[id]||0)<p.stock){cart[id]=(cart[id]||0)+1;renderCart();syncCartToCloud();toast(t("added"));}});
 $("#cart-open").addEventListener("click",()=>$("#cart-overlay").hidden=false);
