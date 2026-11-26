@@ -89,8 +89,19 @@
       </form>
       <h3 data-i18n="manageProducts">Управление товарами</h3>
       <div id="seller-products" class="seller-products"></div>
-      <h3 data-i18n="orders">Заказы</h3>
+      <h3>Заказы</h3>
       <div id="seller-orders" class="seller-orders"></div>
+      <h3>Аналитика за месяц</h3>
+      <div id="seller-analytics" class="seller-stats"></div>
+      <div class="report-actions"><button type="button" id="export-report">Скачать CSV для Excel</button><button type="button" id="print-report">Печать / PDF</button></div>
+      <h3>Добавить расход</h3>
+      <form id="expense-form" class="product-form">
+        <label><span>Категория расхода</span><input name="category" required placeholder="Доставка, аренда..."></label>
+        <label><span>Сумма (сом)</span><input name="amount" type="number" min="1" step="0.01" required></label>
+        <label><span>Комментарий</span><input name="note" placeholder="Необязательно"></label>
+        <button class="button button-primary full-width" type="submit">Сохранить расход</button>
+      </form>
+      <div id="seller-expenses" class="seller-products"></div>
     </aside>
   </div>
   <div class="overlay" id="auth-overlay" hidden>
