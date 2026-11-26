@@ -7,3 +7,7 @@
 .report-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 18px}.report-actions button{border:1px solid #d7dce2;background:#f4f6f8;border-radius:10px;padding:10px 12px;color:#172b3a}
 
 .my-orders-section{max-width:1180px;margin:0 auto;padding:52px 6vw}.qr-code{display:flex;justify-content:center;align-items:center;background:#fff;padding:18px;border-radius:16px;margin:18px auto;min-height:230px}.qr-code img,.qr-code canvas{max-width:100%}
+
+.contact-section{max-width:1180px;margin:0 auto;padding:44px 6vw}.contact-section .product-form{max-width:560px}
+.contact-section textarea{min-height:110px;resize:vertical}
+.message-card{padding:12px;border:1px solid #e0e5eb;border-radius:12px;margin:8px 0;background:#fff}.message-card small{display:block;color:#6b7280;margin:5px 0}.message-card form{display:flex;gap:8px;margin-top:8px}.message-card input{min-width:0;flex:1}
