@@ -15,7 +15,7 @@
       <select id="language" aria-label="Выбрать язык">
         <option value="ru">RU</option><option value="ky">KG</option><option value="en">EN</option>
       </select>
-      <button class="button button-light" id="seller-open">Кабинет продавца</button>
+      <button class="button button-light" id="auth-open">Войти</button><button class="button button-light" id="seller-open">Кабинет продавца</button>
       <button class="cart-button" id="cart-open" aria-label="Открыть корзину">Корзина <b id="cart-count">0</b></button>
     </div>
   </header>
@@ -74,21 +74,37 @@
   <div class="overlay" id="seller-overlay" hidden>
     <aside class="drawer seller-drawer" role="dialog" aria-modal="true" aria-labelledby="seller-title">
       <div class="drawer-head"><div><p class="eyebrow">PRIVATE WORKSPACE</p><h2 id="seller-title" data-i18n="sellerTitle">Кабинет продавца</h2></div><button class="icon-button" data-close="seller" aria-label="Закрыть">×</button></div>
-      <div class="seller-warning" data-i18n="sellerWarning">Это демонстрационный кабинет. Перед запуском нужно подключить защищённую авторизацию.</div>
+      <div class="seller-warning" id="seller-warning">Войдите в аккаунт продавца, чтобы управлять товарами и заказами.</div>
       <div class="seller-stats" id="seller-stats"></div>
       <h3 data-i18n="addProduct">Добавить товар</h3>
       <form id="product-form" class="product-form">
         <label><span data-i18n="productName">Название</span><input name="name" required placeholder="Например, Смеситель"></label>
         <label><span data-i18n="price">Цена (сом)</span><input name="price" type="number" min="0" step="1" required></label>
         <label><span data-i18n="stock">Количество</span><input name="stock" type="number" min="0" step="1" required></label>
-        <label><span data-i18n="category">Категория</span><input name="category" required placeholder="Например, Смесители"></label>
+        <label><span data-i18n="category">Категория (необязательно)</span><input name="category" placeholder="Можно заполнить позже"></label>
+        <label><span>Артикул (необязательно)</span><input name="sku" placeholder="SKU"></label>
         <label><span data-i18n="image">Ссылка на фото</span><input name="image" type="url" placeholder="https://..."></label>
+        <label><span>Или загрузить фото</span><input name="imageFile" type="file" accept="image/*"></label>
         <button class="button button-primary full-width" type="submit" data-i18n="saveProduct">Сохранить товар</button>
       </form>
       <h3 data-i18n="manageProducts">Управление товарами</h3>
       <div id="seller-products" class="seller-products"></div>
       <h3 data-i18n="orders">Заказы</h3>
       <div id="seller-orders" class="seller-orders"></div>
+    </aside>
+  </div>
+  <div class="overlay" id="auth-overlay" hidden>
+    <aside class="drawer auth-drawer" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+      <div class="drawer-head"><div><p class="eyebrow">ACCOUNT</p><h2 id="auth-title">Вход и регистрация</h2></div><button class="icon-button" data-close="auth" aria-label="Закрыть">×</button></div>
+      <p class="small-note" id="auth-help">Создайте аккаунт покупателя или войдите в существующий.</p>
+      <form id="auth-form" class="product-form">
+        <label id="auth-name-wrap"><span>Имя</span><input name="full_name" autocomplete="name" placeholder="Ваше имя"></label>
+        <label><span>Email</span><input name="email" type="email" required autocomplete="email" placeholder="name@example.com"></label>
+        <label><span>Пароль</span><input name="password" type="password" required minlength="8" autocomplete="current-password" placeholder="Минимум 8 символов"></label>
+        <button class="button button-primary full-width" id="auth-submit" type="submit">Войти</button>
+      </form>
+      <button class="text-button" id="auth-toggle" type="button">Нет аккаунта? Зарегистрироваться</button>
+      <button class="text-button" id="auth-signout" type="button" hidden>Выйти из аккаунта</button>
     </aside>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
