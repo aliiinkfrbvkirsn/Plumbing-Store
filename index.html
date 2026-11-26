@@ -14,14 +14,14 @@
 <body>
   <header class="topbar">
     <a class="brand" href="#" aria-label="На главную"><span class="brand-mark">S</span><span>Сантех<span class="brand-accent">Маркет</span></span></a>
-    <nav class="site-nav"><a href="#catalog">Каталог</a><a href="#about">О магазине</a><a href="#contact">Контакты</a></nav>
+    <nav class="site-nav" aria-label="Основная навигация"><a href="#catalog"><span aria-hidden="true">▦</span><span>Каталог</span></a><a href="#my-orders-section"><span aria-hidden="true">▤</span><span>Мои заказы</span></a><a href="#about"><span aria-hidden="true">ⓘ</span><span>О магазине</span></a><a href="#contact"><span aria-hidden="true">✉</span><span>Контакты</span></a></nav>
     <div class="header-actions">
       <label class="language-label" for="language">Язык</label>
       <select id="language" aria-label="Выбрать язык">
         <option value="ru">RU</option><option value="ky">KG</option><option value="en">EN</option>
       </select>
-      <button class="button button-light" id="auth-open">Войти</button><button class="button button-light" id="qr-open">QR-код</button><button class="button button-light" id="install-app" hidden>Установить</button><button class="button button-light" id="seller-open">Кабинет продавца</button>
-      <button class="cart-button" id="cart-open" aria-label="Открыть корзину">Корзина <b id="cart-count">0</b></button>
+      <button class="button button-light header-action" id="auth-open"><span aria-hidden="true">👤</span><span>Аккаунт</span></button><button class="button button-light header-action" id="qr-open"><span aria-hidden="true">▦</span><span>QR-код</span></button><button class="button button-light header-action" id="install-app" hidden><span aria-hidden="true">↓</span><span>Установить</span></button><button class="button button-light header-action" id="seller-open"><span aria-hidden="true">⚙</span><span>Продавец</span></button>
+      <button class="cart-button header-action" id="cart-open" aria-label="Открыть корзину"><span aria-hidden="true">🛒</span><span>Корзина</span><b id="cart-count">0</b></button>
     </div>
   </header>
 
@@ -75,7 +75,7 @@
         <label><span data-i18n="yourName">Ваше имя</span><input name="name" required autocomplete="name" placeholder="Имя"></label>
         <label><span data-i18n="yourPhone">Телефон</span><input name="phone" required type="tel" autocomplete="tel" placeholder="+996 ..."></label>
         <button class="button button-primary full-width" type="submit" data-i18n="checkout">Оформить заказ</button>
-        <p class="small-note" data-i18n="demoNote">Демо-режим: заказ сохранится только в этом браузере.</p>
+        <p class="small-note" data-i18n="demoNote">Заказ будет сохранён в вашем аккаунте.</p>
       </form>
     </aside>
   </div>
