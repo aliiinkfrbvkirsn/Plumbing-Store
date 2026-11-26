@@ -54,6 +54,7 @@
 
     <section class="my-orders-section" id="my-orders-section"><div class="section-heading"><div><p class="eyebrow">ACCOUNT</p><h2>Мои заказы</h2></div></div><div id="my-orders" class="seller-orders"><div class="empty-state">Войдите, чтобы увидеть историю заказов.</div></div></section>
 
+    <section class="contact-section" id="contact"><div class="section-heading"><div><p class="eyebrow">CONTACT</p><h2>Связаться с продавцом</h2></div></div><p class="small-note">Напишите вопрос — сообщение попадёт в кабинет продавца.</p><form id="contact-form" class="product-form"><label><span>Сообщение</span><textarea name="body" required minlength="2" maxlength="4000" placeholder="Напишите сообщение..."></textarea></label><button class="button button-primary" type="submit">Отправить сообщение</button></form><div id="my-messages" class="seller-orders"></div></section>
     <section class="info-strip">
       <div><span class="info-icon">01</span><h3 data-i18n="info1Title">Удобный выбор</h3><p data-i18n="info1Text">Найдите нужную деталь через поиск и каталог.</p></div>
       <div><span class="info-icon">02</span><h3 data-i18n="info2Title">Корзина под рукой</h3><p data-i18n="info2Text">Количество и общая сумма считаются автоматически.</p></div>
@@ -109,6 +110,7 @@
         <button class="button button-primary full-width" type="submit">Сохранить расход</button>
       </form>
       <div id="seller-expenses" class="seller-products"></div>
+      <h3>Сообщения покупателей</h3><div id="seller-messages" class="seller-orders"></div>
     </aside>
   </div>
   <div class="overlay" id="auth-overlay" hidden>
