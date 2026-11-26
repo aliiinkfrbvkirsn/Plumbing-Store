@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102a43">
+  <title>СантехМаркет — магазин сантехнических запчастей</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="На главную"><span class="brand-mark">S</span><span>Сантех<span class="brand-accent">Маркет</span></span></a>
+    <div class="header-actions">
+      <label class="language-label" for="language">Язык</label>
+      <select id="language" aria-label="Выбрать язык">
+        <option value="ru">RU</option><option value="ky">KG</option><option value="en">EN</option>
+      </select>
+      <button class="button button-light" id="seller-open">Кабинет продавца</button>
+      <button class="cart-button" id="cart-open" aria-label="Открыть корзину">Корзина <b id="cart-count">0</b></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="eyebrow">НАДЁЖНЫЕ ДЕТАЛИ ДЛЯ ВАШЕГО ДОМА</p>
+        <h1 data-i18n="heroTitle">Всё для сантехники.<br><em>В одном месте.</em></h1>
+        <p class="hero-description" data-i18n="heroText">Подберите нужные запчасти, добавьте их в корзину и оформите заказ онлайн.</p>
+        <a class="button button-primary" href="#catalog" data-i18n="shopNow">Перейти в каталог <span>↗</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="hero-disc"><span>⚙</span><small>PLUMBING<br>SUPPLIES</small></div>
+        <div class="floating-chip chip-top">● Качество</div><div class="floating-chip chip-bottom">✦ Удобный заказ</div>
+      </div>
+      <div class="hero-bottom"><span>01 / 03</span><span data-i18n="heroBottom">ПРОСТО. БЫСТРО. УДОБНО.</span></div>
+    </section>
+
+    <section class="catalog-section" id="catalog">
+      <div class="section-heading">
+        <div><p class="eyebrow" data-i18n="catalogEyebrow">НАШ АССОРТИМЕНТ</p><h2 data-i18n="catalogTitle">Популярные товары</h2></div>
+        <span class="catalog-count" id="product-count">0 товаров</span>
+      </div>
+      <div class="catalog-tools">
+        <label class="search-wrap"><span>⌕</span><input id="search" type="search" placeholder="Поиск по товарам..." data-i18n-placeholder="searchPlaceholder"></label>
+        <select id="category-filter" aria-label="Категория"><option value="all" data-i18n="allCategories">Все категории</option></select>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+    </section>
+
+    <section class="info-strip">
+      <div><span class="info-icon">01</span><h3 data-i18n="info1Title">Удобный выбор</h3><p data-i18n="info1Text">Найдите нужную деталь через поиск и каталог.</p></div>
+      <div><span class="info-icon">02</span><h3 data-i18n="info2Title">Корзина под рукой</h3><p data-i18n="info2Text">Количество и общая сумма считаются автоматически.</p></div>
+      <div><span class="info-icon">03</span><h3 data-i18n="info3Title">Личный кабинет</h3><p data-i18n="info3Text">Следите за своими заказами в одном месте.</p></div>
+    </section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">S</span><span>Сантех<span class="brand-accent">Маркет</span></span></a><p data-i18n="footerText">Магазин сантехнических запчастей</p><span>© <span id="year"></span></span></footer>
+
+  <div class="overlay" id="cart-overlay" hidden>
+    <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="drawer-head"><div><p class="eyebrow">YOUR SELECTION</p><h2 id="cart-title" data-i18n="cartTitle">Корзина</h2></div><button class="icon-button" data-close="cart" aria-label="Закрыть">×</button></div>
+      <div id="cart-items" class="cart-items"></div>
+      <div class="cart-total"><span data-i18n="total">Итого</span><strong id="cart-total">0 сом</strong></div>
+      <form id="checkout-form" class="checkout-form">
+        <label><span data-i18n="yourName">Ваше имя</span><input name="name" required autocomplete="name" placeholder="Имя"></label>
+        <label><span data-i18n="yourPhone">Телефон</span><input name="phone" required type="tel" autocomplete="tel" placeholder="+996 ..."></label>
+        <button class="button button-primary full-width" type="submit" data-i18n="checkout">Оформить заказ</button>
+        <p class="small-note" data-i18n="demoNote">Демо-режим: заказ сохранится только в этом браузере.</p>
+      </form>
+    </aside>
+  </div>
+
+  <div class="overlay" id="seller-overlay" hidden>
+    <aside class="drawer seller-drawer" role="dialog" aria-modal="true" aria-labelledby="seller-title">
+      <div class="drawer-head"><div><p class="eyebrow">PRIVATE WORKSPACE</p><h2 id="seller-title" data-i18n="sellerTitle">Кабинет продавца</h2></div><button class="icon-button" data-close="seller" aria-label="Закрыть">×</button></div>
+      <div class="seller-warning" data-i18n="sellerWarning">Это демонстрационный кабинет. Перед запуском нужно подключить защищённую авторизацию.</div>
+      <div class="seller-stats" id="seller-stats"></div>
+      <h3 data-i18n="addProduct">Добавить товар</h3>
+      <form id="product-form" class="product-form">
+        <label><span data-i18n="productName">Название</span><input name="name" required placeholder="Например, Смеситель"></label>
+        <label><span data-i18n="price">Цена (сом)</span><input name="price" type="number" min="0" step="1" required></label>
+        <label><span data-i18n="stock">Количество</span><input name="stock" type="number" min="0" step="1" required></label>
+        <label><span data-i18n="category">Категория</span><input name="category" required placeholder="Например, Смесители"></label>
+        <label><span data-i18n="image">Ссылка на фото</span><input name="image" type="url" placeholder="https://..."></label>
+        <button class="button button-primary full-width" type="submit" data-i18n="saveProduct">Сохранить товар</button>
+      </form>
+      <h3 data-i18n="manageProducts">Управление товарами</h3>
+      <div id="seller-products" class="seller-products"></div>
+      <h3 data-i18n="orders">Заказы</h3>
+      <div id="seller-orders" class="seller-orders"></div>
+    </aside>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
