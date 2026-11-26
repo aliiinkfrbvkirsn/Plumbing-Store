@@ -5,3 +5,5 @@
 .auth-drawer{max-width:480px}.text-button{border:0;background:transparent;color:var(--accent,#1c7ed6);font:inherit;padding:12px 0;cursor:pointer}.seller-warning{padding:12px;border-radius:12px;background:#fff4d6;color:#6b4c00;margin:12px 0}.seller-product{gap:10px}.seller-product button{flex-shrink:0}
 
 .report-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 18px}.report-actions button{border:1px solid #d7dce2;background:#f4f6f8;border-radius:10px;padding:10px 12px;color:#172b3a}
+
+.my-orders-section{max-width:1180px;margin:0 auto;padding:52px 6vw}.qr-code{display:flex;justify-content:center;align-items:center;background:#fff;padding:18px;border-radius:16px;margin:18px auto;min-height:230px}.qr-code img,.qr-code canvas{max-width:100%}
