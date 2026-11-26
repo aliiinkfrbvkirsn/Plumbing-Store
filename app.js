@@ -22,7 +22,8 @@ async function loadProducts(){
   const result=await db.from("products").select("id,sku,name,description,category,price,stock,image_path,is_active").eq("is_active",true).order("created_at",{ascending:false});
   if(result.error) throw result.error;
   products=(result.data||[]).map(p=>({id:p.id,sku:p.sku,name:p.name||{},description:p.description||{},category:p.category||"Other",price:Number(p.price)||0,stock:Number(p.stock)||0,image_path:p.image_path||null,sku:p.sku||"",image:p.image_path?(p.image_path.startsWith("http")?p.image_path:SUPABASE_URL+"/storage/v1/object/public/product-images/"+p.image_path.split("/").map(encodeURIComponent).join("/")):"",emoji:"🔧"}));
-  renderProducts(); renderCart(); renderSeller();
+  if(products.length===0){$("#product-grid").innerHTML='<div class="empty-state"><strong>Пока нет товаров</strong><br>Продавец ещё не добавил товары. Они появятся здесь автоматически.</div>';$("#product-count").textContent="0 товаров";}else{renderProducts();}
+  renderCart(); renderSeller();
  } catch(error) {
   console.error("Supabase products load failed:",error);
   $("#product-grid").innerHTML=`<div class="empty-state load-error"><strong>Не удалось загрузить товары</strong><br>${esc(error.message||"Проверь подключение к базе данных.")}<br><button type="button" id="retry-products" class="button button-light">Повторить</button></div>`;
