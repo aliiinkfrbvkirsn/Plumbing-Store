@@ -20,7 +20,7 @@ async function loadProducts(){
  try {
   const result=await db.from("products").select("id,sku,name,description,category,price,stock,image_path,is_active").eq("is_active",true).order("created_at",{ascending:false});
   if(result.error) throw result.error;
-  products=(result.data||[]).map(p=>({id:p.id,sku:p.sku,name:p.name||{},description:p.description||{},category:p.category||"Other",price:Number(p.price)||0,stock:Number(p.stock)||0,image:p.image_path?SUPABASE_URL+"/storage/v1/object/public/product-images/"+p.image_path.split("/").map(encodeURIComponent).join("/"):"",emoji:"🔧"}));
+  products=(result.data||[]).map(p=>({id:p.id,sku:p.sku,name:p.name||{},description:p.description||{},category:p.category||"Other",price:Number(p.price)||0,stock:Number(p.stock)||0,image_path:p.image_path||null,sku:p.sku||"",image:p.image_path?SUPABASE_URL+"/storage/v1/object/public/product-images/"+p.image_path.split("/").map(encodeURIComponent).join("/"):"",emoji:"🔧"}));
   renderProducts(); renderCart(); renderSeller();
  } catch(error) {
   console.error("Supabase products load failed:",error);
@@ -54,7 +54,7 @@ function renderSeller(){
  if(!currentProfile || currentProfile.role!=="seller"){ $("#seller-stats").innerHTML=""; $("#seller-products").innerHTML="<div class=\"empty-state\">Войдите как продавец, чтобы управлять товарами.</div>"; $("#seller-orders").innerHTML=""; return; }
  $("#seller-stats").innerHTML=`<div class="stat"><strong>${products.length}</strong><span>${t("products")}</span></div><div class="stat"><strong>${products.reduce((s,p)=>s+p.stock,0)}</strong><span>${t("items")}</span></div><div class="stat"><strong>${orders.length}</strong><span>${t("orders")}</span></div>`;
  $("#seller-products").innerHTML=products.map(p=>`<div class="seller-product"><span><b>${esc(localized(p,"name"))}</b><br><small>${money(p.price)} · ${p.stock} ${t("items")}</small></span><span><button data-edit="${p.id}">Изменить</button> <button data-delete="${p.id}">${t("delete")}</button></span></div>`).join("");
- $("#seller-orders").innerHTML=orders.length?orders.slice().reverse().map(o=>`<div class="seller-order"><span><b>${t("order")} #${o.id}</b><br><small>${esc(o.name)} · ${esc(o.phone)}</small></span><strong>${money(o.total)}</strong></div>`).join(""):`<div class="empty-state">${t("emptyOrders")}</div>`;
+ $("#seller-orders").innerHTML=orders.length?orders.slice().reverse().map(o=>`<div class="seller-order"><span><b>${t("order")} #${String(o.id).slice(0,8)}</b><br><small>${esc(o.customer_name||o.name||"")} · ${esc(o.phone||"")} · ${esc(o.status||"pending")}</small></span><strong>${money(o.total)}</strong></div>`).join(""):`<div class="empty-state">${t("emptyOrders")}</div>`;
 }
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 $("#language").addEventListener("change",e=>{lang=e.target.value;localStorage.setItem("plumb_lang",lang);applyLanguage()});
