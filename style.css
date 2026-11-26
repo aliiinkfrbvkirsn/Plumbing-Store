@@ -49,3 +49,9 @@ input,select,textarea,button{max-width:100%}
 .drawer{width:100%;padding:18px 15px}
 }
 @media(max-width:370px){.brand{font-size:14px}.header-action{font-size:9px!important}.site-nav a{font-size:9px}.product-grid{gap:8px}}
+
+/* Ensure the HTML hidden attribute works even on styled form labels and buttons. */
+[hidden]{display:none!important}
+.auth-status{min-height:20px;margin:8px 0;color:#b33b22;font-size:13px;line-height:1.45;overflow-wrap:anywhere}
+.auth-drawer .button,.auth-drawer .text-button{position:relative;z-index:1;touch-action:manipulation;pointer-events:auto}
+.auth-drawer .product-form{position:relative;z-index:1}
